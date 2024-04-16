@@ -20,15 +20,19 @@
                             <a class="nav-link active fw-medium" aria-current="page" href="./index.php">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  fw-medium" href="./register.php">Registrati</a>
+                            <a class="nav-link  fw-medium <?= !isset($_SESSION['loggato']) ? 'd-block' : 'd-none' ?>" href="./register.php">Registrati</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fw-medium" href="./login.php">Accedi</a>
+                            <a class="nav-link fw-medium  <?= !isset($_SESSION['loggato']) ? 'd-block' : 'd-none' ?>" href="./login.php">Accedi</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link fw-medium <?= isset($_SESSION['loggato']) ? 'd-block' : 'd-none' ?>" href="./area_privata.php">Area privata</a>
                         </li>
                     </ul>
+                    <div class="d-flex me-2 gap-2">
+                        <img src="<?= $user['image'] ?? "" ?>" alt="" style="width: 40px;">
+                        <h3><?= $user['username'] ?? "Ospite" ?></h3>
+                    </div>
                 </div>
             </div>
         </nav>

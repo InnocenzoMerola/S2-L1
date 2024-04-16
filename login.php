@@ -1,6 +1,11 @@
 <?php
 include_once __DIR__ . "/includes/init.php";
 
+if(isset($_SESSION['loggato']) && $_SESSION['loggato'] === true){
+    header('Location: /IFOA-BackEnd/S-2/S2-L1/index.php');
+    
+    exit();
+};
 
 $username = $_POST['username'] ?? '';
 
@@ -22,18 +27,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $user = $stmt->fetch();
 
         if($user){
-
             if(password_verify($password, $user['password'])){
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['loggato'] = true;
                 
                 header('Location: /IFOA-BackEnd/S-2/S2-L1/area_privata.php');
                 exit();
-            }else{
-                echo "Nome utente o password non corretti";
             }
         }
     }
+
+    $errors['dati'] = "Nome utente o password non corretti";
 }
 
 
